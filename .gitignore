@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+ 
+# AI agent files (do not commit)
+/AGENTS.md
+/CLAUDE.md
+*.agent.md
+*.prompt.md
+*.instructions.md
+/SIDEBAR_IMPROVEMENTS.md
