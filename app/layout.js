@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Reveal V2 - Space Analysis System",
-  description: "Reveal V2 Space Analysis System",
+  title: "Reveal - Space Analysis System",
+  description: "Reveal Space Analysis System",
 };
 
 export default function RootLayout({ children }) {
