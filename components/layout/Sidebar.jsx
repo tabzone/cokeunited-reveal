@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "../../app/components/AuthProvider";
 
 // base nav when not in projectSetup
 
@@ -244,7 +245,15 @@ export default function Sidebar({ isOpen }) {
       },
     ];
   };
-  const navItems = useMemo(() => getNavItems(), [pathname]);
+  const { user } = useAuth();
+
+  const navItems = useMemo(() => {
+    const items = getNavItems();
+    if (user && user.role === "retailer") {
+      return items.filter((i) => i.href === "/");
+    }
+    return items;
+  }, [pathname, user]);
 
   // Auto-expand parent when a child route is active
   useEffect(() => {
