@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Table from "@/components/table/Table";
+import DataTable from "./table/DataTable";
 
 const projects = [
   {
@@ -163,7 +163,7 @@ export default function ManageRetailer() {
         </div>
       </div> */}
 
-      <Table rows={filtered} />
+      <DataTable rows={filtered} />
     </div>
   );
 }

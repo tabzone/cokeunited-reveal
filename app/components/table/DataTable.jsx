@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-export default function Table({ rows }) {
+export default function DataTable({ rows }) {
   return (
     <div className="bg-white rounded-xl shadow-sm border overflow-hidden">
 
