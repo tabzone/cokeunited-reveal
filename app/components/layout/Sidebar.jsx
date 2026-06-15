@@ -7,7 +7,7 @@ import { useAuth } from "../AuthProvider";
 
 // base nav when not in projectSetup
 
-export default function Sidebar({ isOpen }) {
+export default function Sidebar({ isOpen, onToggleSidebar }) {
   const pathname = usePathname();
   const getDefaultExpanded = () => {
     if (pathname.includes("/uploads")) {
@@ -291,18 +291,42 @@ export default function Sidebar({ isOpen }) {
   }, [pathname, navItems]);
 
   return (
-    <aside className={`h-screen bg-gray-900 text-white transition-all duration-200 flex flex-col ${isOpen ? 'w-72' : 'w-16'}`}>
-      {/* Logo */}
-      <div className="flex items-center gap-3 px-4 pb-4">
-        {/* <div className="flex items-center justify-center w-8 h-8">
-        </div> */}
+    <aside
+      className={`h-screen bg-white text-gray-700 border-r border-gray-200 transition-all duration-200 flex flex-col ${isOpen ? "w-72" : "w-16"
+        }`}
+    >
+      {/* Top: Logo + Toggle */}
+      <div
+        className={`flex items-center px-3 py-4 ${isOpen ? "justify-between" : "justify-center"
+          }`}
+      >
         {isOpen ? (
-          <Link href="/" className="flex flex-col">
-          
-             <img src="/Parkers%20Kitchen.png" alt="Parkers Kitchen" className="h-24 w-auto" />
+          <Link href="/" className="flex items-center">
+            <img
+              src="/Parkers%20Kitchen.png"
+              alt="Parker's Kitchen"
+              className="h-20   w-auto"
+            />
           </Link>
-        ):<span className="pb-14"></span>}
+        ): <div className="pb-4 "></div>}
+
+        <button
+          onClick={onToggleSidebar}
+          className="p-2 rounded-md text-gray-500 hover:bg-gray-100 hover:text-[#0066B3] transition-colors cursor-pointer"
+          aria-label="Toggle sidebar"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M4 6H20M4 12H20M4 18H20"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
       </div>
+
+      <div className="mx-3 mb-2 h-px bg-gray-200" />
 
       {/* Nav */}
       <nav className="px-2 flex-1 overflow-auto" role="navigation" aria-label="Main navigation">
@@ -322,7 +346,7 @@ export default function Sidebar({ isOpen }) {
 
             return (
               <div key={item.label}>
-                  <button
+                <button
                   type="button"
                   aria-expanded={isExpanded}
                   aria-controls={submenuId}
@@ -343,13 +367,16 @@ export default function Sidebar({ isOpen }) {
                         : [...prev, item.label]
                     )
                   }
-                  className={`w-full text-left flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${isActive ? 'bg-gray-500 text-white font-semibold border-l-4 border-[#0066B3] pl-2' : 'text-white hover:bg-gray-500'}`}
+                  className={`w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-md transition-colors ${isActive
+                      ? "bg-blue-50 text-[#0066B3] font-semibold border-l-4 border-[#0066B3] pl-2"
+                      : "text-gray-600 hover:bg-gray-100 hover:text-[#0066B3]"
+                    }`}
                 >
                   <span className="w-5 h-5">{item.icon}</span>
                   {isOpen && (
                     <>
-                      <span className="flex-1 text-lg">{item.label}</span>
-                      <span className={`ml-2 ${isExpanded ? 'rotate-180' : ''} transition-transform`}>
+                      <span className="flex-1 text-base">{item.label}</span>
+                      <span className={`ml-2 ${isExpanded ? "rotate-180" : ""} transition-transform`}>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
                           <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
@@ -366,8 +393,11 @@ export default function Sidebar({ isOpen }) {
                         <Link
                           key={child.label}
                           href={child.href}
-                          aria-current={childActive ? 'page' : undefined}
-                          className={`text-base px-2 py-1 rounded-md ${childActive ? 'bg-gray-500 text-white' : 'text-white hover:bg-gray-500'}`}
+                          aria-current={childActive ? "page" : undefined}
+                          className={`text-sm px-2 py-1.5 rounded-md transition-colors ${childActive
+                              ? "bg-blue-50 text-[#0066B3] font-medium"
+                              : "text-gray-600 hover:bg-gray-100 hover:text-[#0066B3]"
+                            }`}
                         >
                           <span className="inline-block w-2 h-2 rounded-full bg-[#7AC142] mr-2 align-middle" />
                           {child.label}
@@ -385,11 +415,14 @@ export default function Sidebar({ isOpen }) {
             <div key={item.label}>
               <Link
                 href={item.href}
-                aria-current={isActive ? 'page' : undefined}
-                className={`flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${isActive ? 'bg-gray-500 text-white font-semibold border-l-4 border-[#0066B3] pl-2' : 'text-white hover:bg-gray-500'}`}
+                aria-current={isActive ? "page" : undefined}
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-md transition-colors mb-1 ${isActive
+                    ? "bg-blue-50 text-[#0066B3] font-semibold border-l-4 border-[#0066B3] pl-2"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-[#0066B3]"
+                  }`}
               >
                 <span className="w-5 h-5">{item.icon}</span>
-                {isOpen && <span className="flex-1 text-lg">{item.label}</span>}
+                {isOpen && <span className="flex-1 text-base">{item.label}</span>}
               </Link>
             </div>
           );

@@ -4,14 +4,14 @@ import { useState, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "../AuthProvider";
 
-export default function Navbar({ onToggleSidebar }) {
+export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
   const [showUserMenu, setShowUserMenu] = useState(false);
   const menuRef = useRef(null);
 
- const { logout } = useAuth();
+  const { logout } = useAuth();
 
   const isRetailerPlanogram =
     pathname?.startsWith("/retailerPlanogram");
@@ -52,39 +52,13 @@ export default function Navbar({ onToggleSidebar }) {
   };
 
   return (
-    <header className="flex items-center px-4 py-2 bg-gray-900">
-      {/* Hamburger */}
-      <button
-        className="p-2 rounded-md hover:bg-gray-500 text-white cursor-pointer"
-        onClick={onToggleSidebar}
-        aria-label="Toggle sidebar"
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-        >
-          <path
-            d="M4 6H20M4 12H20M4 18H20"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        </svg>
-      </button>
-
-      {/* Logo */}
-      {/* <div className="ml-3 hidden sm:block">
-        <img src="/Parkers%20Kitchen.png" alt="Parkers Kitchen" className="h-8 w-auto" />
-      </div> */}
-
+    <header className="flex items-center px-4 py-3 bg-white border-b border-gray-200">
       {/* Retailer Planogram Header */}
       {isRetailerPlanogram && (
-        <div className="flex items-center ml-4">
+        <div className="flex items-center">
           <button
             onClick={() => router.back()}
-            className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors cursor-pointer"
+            className="flex items-center gap-2 text-gray-600 hover:text-[#0066B3] transition-colors cursor-pointer"
           >
             <svg
               width="20"
@@ -104,10 +78,10 @@ export default function Navbar({ onToggleSidebar }) {
             <span className="text-sm">Back</span>
           </button>
 
-          <div className="mx-4 h-6 w-px bg-gray-600" />
+          <div className="mx-4 h-6 w-px bg-gray-200" />
 
           <div className="flex flex-col">
-            <span className="text-white font-semibold text-lg">
+            <span className="text-gray-800 font-semibold text-lg">
               {projectName}
             </span>
 
@@ -124,7 +98,7 @@ export default function Navbar({ onToggleSidebar }) {
       <div className="flex items-center gap-3">
         {/* Notifications */}
         <button
-          className="p-2 rounded-md hover:bg-gray-500 text-white"
+          className="p-2 rounded-md hover:bg-gray-100 text-gray-500 hover:text-[#0066B3] transition-colors"
           aria-label="Notifications"
         >
           <svg
@@ -156,9 +130,9 @@ export default function Navbar({ onToggleSidebar }) {
             onClick={() =>
               setShowUserMenu((prev) => !prev)
             }
-            className="flex items-center gap-2 px-2 py-1 rounded-md hover:bg-gray-500 text-white cursor-pointer"
+            className="flex items-center gap-2 px-2 py-1 rounded-md hover:bg-gray-100 text-gray-600 hover:text-[#0066B3] transition-colors cursor-pointer"
           >
-            <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center font-medium ">
+            <div className="w-8 h-8 rounded-full bg-blue-50 text-[#0066B3] flex items-center justify-center font-medium">
               <svg
                 width="18"
                 height="18"
