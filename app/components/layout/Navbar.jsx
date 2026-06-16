@@ -92,12 +92,37 @@ export default function Navbar() {
         </div>
       )}
 
-      <div className="flex-1" />
+      {/* Report Details */}
+      <div className="flex-1 flex justify-start">
+        <div className="flex items-center gap-4 text-sm text-gray-600">
+          <span className="font-medium text-gray-800">
+            Category Report
+          </span>
+
+          <div className="h-4 w-px bg-gray-300" />
+
+          <span>
+            Data Last Updated:
+            <span className="ml-1 font-medium text-gray-800">
+              6/12/2025
+            </span>
+          </span>
+
+          <div className="h-4 w-px bg-gray-300" />
+
+          <span>
+            WE:
+            <span className="ml-1 font-medium text-gray-800">
+              6/12 (Week 24)
+            </span>
+          </span>
+        </div>
+      </div>
 
       {/* Right Section */}
       <div className="flex items-center gap-3">
         {/* Notifications */}
-        <button
+        {/* <button
           className="p-2 rounded-md hover:bg-gray-100 text-gray-500 hover:text-[#0066B3] transition-colors"
           aria-label="Notifications"
         >
@@ -122,7 +147,7 @@ export default function Navbar() {
               strokeLinejoin="round"
             />
           </svg>
-        </button>
+        </button> */}
 
         {/* User Menu */}
         <div
