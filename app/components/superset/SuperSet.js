@@ -58,9 +58,9 @@ const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
       dashboardUiConfig: {
         hideTitle: true,
         hideChartControls: false,
-        filters: {
-          expanded: report === "report",
-        },
+        // filters: {
+        //   expanded: report === "report",
+        // },
       },
     }).catch((error) => {
       console.error("Error embedding dashboard:", error);

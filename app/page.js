@@ -29,10 +29,12 @@ export default function HomePage() {
           id="superset-container"
           className="w-full h-screen"
         >
-          <SuperSet
-            EMBEDDED_ID={embeddedId}
-            setGetTok={setGetTok}
-          />
+          {embeddedId !== "" && (
+            <SuperSet
+              EMBEDDED_ID={embeddedId}
+              setGetTok={setGetTok}
+            />
+          )}
         </div>
       </AppLayout>
     </RoleGuard>
