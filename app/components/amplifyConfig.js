@@ -1,36 +1,28 @@
 import { Amplify } from "aws-amplify";
 
-// Replace these values with your Amplify project configuration
-const awsConfig = {
-  Auth: {
-    region: "us-east-1",
-    userPoolId: "us-east-1_9iurl9wCh",
-    userPoolWebClientId: "1raft5p1p09qt2b0nkftgq9qel",
-    mandatorySignIn: false,
-  },
-};
-
 export function initAmplify() {
-  const cfg = awsConfig?.Auth || {};
-  const placeholders = [
-    "YOUR_AWS_REGION",
-    "YOUR_USER_POOL_ID",
-    "YOUR_APP_CLIENT_ID",
-  ];
+  const userPoolId =
+    process.env.NEXT_PUBLIC_USER_POOL_ID;
 
-  const hasPlaceholders = placeholders.some((p) =>
-    Object.values(cfg).some((v) => typeof v === "string" && v.includes(p))
-  );
+  const userPoolClientId =
+    process.env
+      .NEXT_PUBLIC_USER_POOL_CLIENT_ID;
 
-  if (hasPlaceholders) {
-    console.warn(
-      "Amplify not configured — please set real values in app/components/amplifyConfig.js"
+  if (!userPoolId || !userPoolClientId) {
+    console.error(
+      "Amplify configuration missing"
     );
     return false;
   }
 
-  Amplify.configure(awsConfig);
+  Amplify.configure({
+    Auth: {
+      Cognito: {
+        userPoolId,
+        userPoolClientId,
+      },
+    },
+  });
+
   return true;
 }
-
-export default awsConfig;

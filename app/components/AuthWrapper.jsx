@@ -5,7 +5,14 @@ import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "./AuthProvider";
 import LoadingSpinner from "./loading/LoadingSpinner";
 
-export default function AuthWrapper({ children }) {
+const PUBLIC_ROUTES = [
+  "/login",
+  "/forgot-password",
+];
+
+export default function AuthWrapper({
+  children,
+}) {
   const { user, loading } = useAuth();
 
   const router = useRouter();
@@ -14,16 +21,16 @@ export default function AuthWrapper({ children }) {
   useEffect(() => {
     if (loading) return;
 
-    // NOT LOGGED IN
+    // Not authenticated
     if (!user) {
-      if (pathname !== "/login") {
+      if (!PUBLIC_ROUTES.includes(pathname)) {
         router.replace("/login");
       }
       return;
     }
 
-    // LOGGED IN
-    if (pathname === "/login") {
+    // Authenticated
+    if (PUBLIC_ROUTES.includes(pathname)) {
       switch (user.role) {
         case "admin":
           router.replace("/manageRetailer");
@@ -43,12 +50,11 @@ export default function AuthWrapper({ children }) {
     return <LoadingSpinner />;
   }
 
-  // Block page render while redirecting
-  if (!user && pathname !== "/login") {
+  if (!user && !PUBLIC_ROUTES.includes(pathname)) {
     return <LoadingSpinner />;
   }
 
-  if (user && pathname === "/login") {
+  if (user && PUBLIC_ROUTES.includes(pathname)) {
     return <LoadingSpinner />;
   }
 

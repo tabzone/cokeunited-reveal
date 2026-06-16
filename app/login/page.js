@@ -131,10 +131,9 @@ export default function LoginPage() {
                 clearFieldError("username");
               }}
               className={`w-full rounded-xl border px-4 py-3 outline-none transition
-                ${
-                  errors.username
-                    ? "border-red-500 focus:ring-2 focus:ring-red-200"
-                    : "border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                ${errors.username
+                  ? "border-red-500 focus:ring-2 focus:ring-red-200"
+                  : "border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                 }
                 disabled:bg-slate-100`}
             />
@@ -163,10 +162,9 @@ export default function LoginPage() {
                   clearFieldError("password");
                 }}
                 className={`w-full rounded-xl border px-4 py-3 pr-12 outline-none transition
-                  ${
-                    errors.password
-                      ? "border-red-500 focus:ring-2 focus:ring-red-200"
-                      : "border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                  ${errors.password
+                    ? "border-red-500 focus:ring-2 focus:ring-red-200"
+                    : "border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                   }
                   disabled:bg-slate-100`}
               />
@@ -278,6 +276,15 @@ export default function LoginPage() {
               "Login"
             )}
           </button>
+          <div className="mt-4 text-center">
+            <button
+              type="button"
+              onClick={() => router.push("/forgot-password")}
+              className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+            >
+              Forgot Password?
+            </button>
+          </div>
 
           {/* Footer */}
           <div className="mt-6 text-center text-xs text-slate-500">

@@ -6,78 +6,116 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { Auth } from "aws-amplify";
-import { initAmplify } from "./amplifyConfig";
+
+import { usePathname } from "next/navigation";
+
+import {
+  getCurrentUser,
+  fetchUserAttributes,
+  fetchAuthSession,
+  signIn,
+  signOut,
+} from "aws-amplify/auth";
+import { initAmplify } from "../components/amplifyConfig";
+
 
 const AuthContext = createContext(null);
 
+const PUBLIC_ROUTES = [
+  "/login",
+  "/forgot-password",
+];
+
 export function AuthProvider({ children }) {
+  const pathname = usePathname();
+
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] =
+    useState(true);
 
-  const extractRole = (session) => {
-    const groups =
-      session?.signInUserSession?.accessToken?.payload?.[
+  const buildUser = async () => {
+    try {
+      const currentUser =
+        await getCurrentUser();
+
+      const attributes =
+        await fetchUserAttributes();
+
+      const session =
+        await fetchAuthSession();
+
+      const groups =
+        session?.tokens?.accessToken?.payload?.[
         "cognito:groups"
-      ] || [];
+        ] || [];
 
-    if (groups.includes("Admins")) return "admin";
-    if (groups.includes("Retailers")) return "retailer";
+      let role = "user";
 
-    return "user";
+      if (groups.includes("Admins")) {
+        role = "admin";
+      } else if (
+        groups.includes("Retailers")
+      ) {
+        role = "retailer";
+      }
+
+      return {
+        username:
+          currentUser.username,
+
+        email:
+          attributes.email || "",
+
+        given_name:
+          attributes.given_name || "",
+
+        family_name:
+          attributes.family_name || "",
+
+        role,
+      };
+    } catch (error) {
+      console.log(
+        "No authenticated user"
+      );
+      return null;
+    }
   };
 
   useEffect(() => {
-    const loadUser = async () => {
-      try {
-        initAmplify();
+  initAmplify();
 
-        const sessionUser =
-          await Auth.currentAuthenticatedUser();
+  const loadUser = async () => {
+    const userData = await buildUser();
+    setUser(userData);
+    setLoading(false);
+  };
 
-        const role = extractRole(sessionUser);
+  loadUser();
+}, [pathname]);
 
-        setUser({
-          username:
-            sessionUser.attributes?.email ||
-            sessionUser.username,
-          role,
-        });
-      } catch (error) {
-        setUser(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadUser();
-  }, []);
-
-  const login = async ({ username, password }) => {
-    const signedInUser = await Auth.signIn(
+  const login = async ({
+    username,
+    password,
+  }) => {
+    await signIn({
       username,
-      password
-    );
+      password,
+    });
 
-    const role = extractRole(signedInUser);
+    const userData =
+      await buildUser();
 
-    const userObj = {
-      username:
-        signedInUser.attributes?.email ||
-        signedInUser.username,
-      role,
-    };
+    setUser(userData);
 
-    setUser(userObj);
-
-    return userObj;
+    return userData;
   };
 
   const logout = async () => {
     try {
-      await Auth.signOut();
-    } catch (err) {
-      console.error(err);
+      await signOut();
+    } catch (error) {
+      console.error(error);
     }
 
     setUser(null);
@@ -90,8 +128,13 @@ export function AuthProvider({ children }) {
         loading,
         login,
         logout,
-        isAdmin: user?.role === "admin",
-        isRetailer: user?.role === "retailer",
+
+        isAdmin:
+          user?.role === "admin",
+
+        isRetailer:
+          user?.role ===
+          "retailer",
       }}
     >
       {children}
