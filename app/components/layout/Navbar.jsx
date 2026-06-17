@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "../AuthProvider";
+import Link from "next/link";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -91,9 +92,19 @@ export default function Navbar() {
           </div>
         </div>
       )}
-
+        <div className="flex items-center">
+      <Link href="/" className="flex items-center pl-2 pr-24">
+        <img
+          src="/Parkers-Kitchen-Logo.png"
+          alt="Parker's Kitchen"
+          className="h-16   w-auto"
+        />
+      </Link>
+      </div>
       {/* Report Details */}
       <div className="flex-1 flex justify-start">
+
+
         <div className="flex items-center gap-4 text-sm text-gray-600">
           <span className="font-medium text-gray-800">
             Category Report
