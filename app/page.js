@@ -13,13 +13,13 @@ export default function HomePage() {
 
   const [getTok, setGetTok] = useState("");
   return (
-    <RoleGuard
-      allowedRoles={[
-        "admin",
-        "retailer",
-        "user",
-      ]}
-    >
+    // <RoleGuard
+    //   allowedRoles={[
+    //     "admin",
+    //     "retailer",
+    //     "user",
+    //   ]}
+    // >
       <AppLayout>
         {/* <h1 className="text-2xl font-bold">
           Dashboard
@@ -37,6 +37,6 @@ export default function HomePage() {
           )}
         </div>
       </AppLayout>
-    </RoleGuard>
+    // </RoleGuard>
   );
 }

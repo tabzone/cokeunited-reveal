@@ -83,16 +83,39 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-  initAmplify();
+    initAmplify();
 
-  const loadUser = async () => {
-    const userData = await buildUser();
-    setUser(userData);
-    setLoading(false);
-  };
+    const loadUser = async () => {
+      const userData = await buildUser();
+      setUser(userData);
+      setLoading(false);
+    };
 
-  loadUser();
-}, [pathname]);
+    loadUser();
+  }, [pathname]);
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      try {
+        await fetchAuthSession({
+          forceRefresh: true,
+        });
+      } catch (err) {
+        console.error(
+          "Session refresh failed",
+          err
+        );
+
+        try {
+          await signOut();
+        } catch { }
+
+        setUser(null);
+      }
+    }, 10 * 60 * 1000); // every 10 minutes
+
+    return () => clearInterval(interval);
+  }, []);
 
   const login = async ({
     username,

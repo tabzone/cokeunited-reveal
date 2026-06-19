@@ -215,7 +215,7 @@ export default function Navbar() {
           </button>
 
           {/* Dropdown */}
-          <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-xl border border-gray-200 overflow-hidden z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          <div className="absolute right-0 mt-2 z-[99999] w-48 bg-white rounded-md shadow-xl border border-gray-200 overflow-hidden z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
             {/* Profile */}
             <button
               onClick={() => router.push("/profile")}
