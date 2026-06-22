@@ -120,7 +120,7 @@ export default function Navbar() {
           <span>
             Data Last Updated:
             <span className="ml-1 font-medium text-gray-800">
-              6/12/2025
+              6/12/2026
             </span>
           </span>
 
