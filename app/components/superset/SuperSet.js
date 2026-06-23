@@ -7,7 +7,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 
 const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
   const [loading, setLoading] = useState(true);
-  const { theme } = useTheme()
+ // const { theme } = useTheme()
 
   const loadingRef = useRef(false);
   const retryRef = useRef(null);
