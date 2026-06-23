@@ -88,7 +88,7 @@ const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
       loadingRef.current = false;
       setLoading(false);
     }
-  }, [EMBEDDED_ID, fetchGuestTokenFromBackend, theme]);
+  }, [EMBEDDED_ID, fetchGuestTokenFromBackend]);
 
   // Initial load
   useEffect(() => {
