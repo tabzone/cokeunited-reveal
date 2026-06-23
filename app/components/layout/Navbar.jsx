@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "../AuthProvider";
+import { useTheme } from "../ThemeProvider";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -13,6 +14,7 @@ export default function Navbar() {
   const menuRef = useRef(null);
 
   const { logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   const isRetailerPlanogram =
     pathname?.startsWith("/retailerPlanogram");
@@ -53,13 +55,26 @@ export default function Navbar() {
   };
 
   return (
-    <header className="flex items-center px-4 py-3 bg-white border-b border-gray-200">
+    <header
+      className="
+        flex items-center px-4 py-3
+        bg-white dark:bg-gray-900
+        border-b border-gray-200 dark:border-gray-800
+        transition-colors duration-300
+      "
+    >
       {/* Retailer Planogram Header */}
       {isRetailerPlanogram && (
         <div className="flex items-center">
           <button
             onClick={() => router.back()}
-            className="flex items-center gap-2 text-gray-600 hover:text-[#0066B3] transition-colors cursor-pointer"
+            className="
+              flex items-center gap-2
+              text-gray-600 dark:text-gray-300
+              hover:text-[#0066B3]
+              transition-colors
+              cursor-pointer
+            "
           >
             <svg
               width="20"
@@ -79,56 +94,61 @@ export default function Navbar() {
             <span className="text-sm">Back</span>
           </button>
 
-          <div className="mx-4 h-6 w-px bg-gray-200" />
+          <div className="mx-4 h-6 w-px bg-gray-300 dark:bg-gray-700" />
 
           <div className="flex flex-col">
-            <span className="text-gray-800 font-semibold text-lg">
+            <span className="font-semibold text-lg text-gray-800 dark:text-white">
               {projectName}
             </span>
 
-            <span className="text-gray-400 text-xs">
+            <span className="text-xs text-gray-500 dark:text-gray-400">
               Retailer Planogram
             </span>
           </div>
         </div>
       )}
+
+      {/* Logos */}
       <div className="flex items-center">
-        <Link href="/" className="flex items-center gap-2 pl-2 pr-24">
+        <Link
+          href="/"
+          className="flex items-center gap-2 pl-2 pr-24"
+        >
           <img
             src="/cokeunited-logo.png"
-            alt="Parker's Kitchen"
-            className="h-16   w-auto"
+            alt="Coke United"
+            className="h-16 w-auto"
           />
+
           <img
             src="/Parkers-Kitchen-Logo.png"
-            alt="Parker's Kitchen"
-            className="h-10   w-auto"
+            alt="Parkers Kitchen"
+            className="h-10 w-auto"
           />
         </Link>
       </div>
+
       {/* Report Details */}
       <div className="flex-1 flex justify-start">
-
-
-        <div className="flex items-center gap-4 text-sm text-gray-600">
-          <span className="font-medium text-gray-800">
+        <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-300">
+          <span className="font-medium text-gray-800 dark:text-white">
             Category Report
           </span>
 
-          <div className="h-4 w-px bg-gray-300" />
+          <div className="h-4 w-px bg-gray-300 dark:bg-gray-700" />
 
           <span>
             Data Last Updated:
-            <span className="ml-1 font-medium text-gray-800">
+            <span className="ml-1 font-medium text-gray-800 dark:text-white">
               6/12/2026
             </span>
           </span>
 
-          <div className="h-4 w-px bg-gray-300" />
+          <div className="h-4 w-px bg-gray-300 dark:bg-gray-700" />
 
           <span>
             WE:
-            <span className="ml-1 font-medium text-gray-800">
+            <span className="ml-1 font-medium text-gray-800 dark:text-white">
               6/12 (Week 24)
             </span>
           </span>
@@ -137,44 +157,125 @@ export default function Navbar() {
 
       {/* Right Section */}
       <div className="flex items-center gap-3">
-        {/* Notifications */}
-        {/* <button
-          className="p-2 rounded-md hover:bg-gray-100 text-gray-500 hover:text-[#0066B3] transition-colors"
-          aria-label="Notifications"
+
+        {/* Theme Toggle */}
+        <button
+          onClick={toggleTheme}
+          className="
+            p-2
+            rounded-lg
+            border
+            border-gray-300 dark:border-gray-700
+            hover:bg-gray-100 dark:hover:bg-gray-800
+            transition-all
+            cursor-pointer
+          "
+          aria-label="Toggle Theme"
         >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
-            <path
-              d="M18 8A6 6 0 1 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
+          {theme === "light" ? (
+            // <svg
+            //   width="20"
+            //   height="20"
+            //   viewBox="0 0 24 24"
+            //   fill="none"
+            //   className="text-gray-700"
+            // >
+            //   <path
+            //     d="M21 12.79A9 9 0 0111.21 3
+            //     7 7 0 0021 12.79z"
+            //     stroke="currentColor"
+            //     strokeWidth="2"
+            //     strokeLinecap="round"
+            //     strokeLinejoin="round"
+            //   />
+            // </svg>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
               stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M13.73 21a2 2 0 0 1-3.46 0"
+              strokeWidth="2"
+
+              className="text-gray-700"
+            >
+              <path d="M21 12.79A9 9 0 1111.21 3c0 .28.02.56.05.84A7 7 0 0021 12.79z" />
+            </svg>
+          ) : (
+            // <svg
+            //   width="20"
+            //   height="20"
+            //   viewBox="0 0 24 24"
+            //   fill="none"
+            //   className="text-yellow-400"
+            // >
+            //   <circle
+            //     cx="12"
+            //     cy="12"
+            //     r="5"
+            //     stroke="currentColor"
+            //     strokeWidth="2"
+            //   />
+
+            //   <path
+            //     d="M12 1V3
+            //     M12 21V23
+            //     M4.22 4.22L5.64 5.64
+            //     M18.36 18.36L19.78 19.78
+            //     M1 12H3
+            //     M21 12H23
+            //     M4.22 19.78L5.64 18.36
+            //     M18.36 5.64L19.78 4.22"
+            //     stroke="currentColor"
+            //     strokeWidth="2"
+            //     strokeLinecap="round"
+            //   />
+            // </svg>
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
               stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button> */}
+              strokeWidth="2"
+              width="20"
+              height="20"
+              className="text-yellow-400"
+            >
+              <circle cx="12" cy="12" r="5" />
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+            </svg>
+          )}
+        </button>
 
         {/* User Menu */}
         <div
-          className="relative group"
+          className="relative"
           ref={menuRef}
         >
           <button
-            className="flex items-center gap-2 px-2 py-1 rounded-md hover:bg-gray-100 text-gray-600 hover:text-[#0066B3] transition-colors cursor-pointer"
+            onClick={() =>
+              setShowUserMenu(!showUserMenu)
+            }
+            className="
+              flex items-center gap-2
+              px-2 py-1
+              rounded-md
+              hover:bg-gray-100 dark:hover:bg-gray-800
+              text-gray-600 dark:text-gray-300
+              hover:text-[#0066B3]
+              transition-colors
+              cursor-pointer
+            "
           >
-            <div className="w-8 h-8 rounded-full bg-blue-50 text-[#0066B3] flex items-center justify-center">
-              {/* User Icon */}
+            <div
+              className="
+                w-8 h-8
+                rounded-full
+                bg-blue-50 dark:bg-white/50
+                text-[#0066B3]
+                flex items-center justify-center
+              "
+            >
               <svg
                 width="18"
                 height="18"
@@ -202,7 +303,8 @@ export default function Navbar() {
               height="14"
               viewBox="0 0 24 24"
               fill="none"
-              className="transition-transform duration-200 group-hover:rotate-180"
+              className={`transition-transform duration-200 ${showUserMenu ? "rotate-180" : ""
+                }`}
             >
               <path
                 d="M6 9L12 15L18 9"
@@ -214,72 +316,99 @@ export default function Navbar() {
             </svg>
           </button>
 
-          {/* Dropdown */}
-          <div className="absolute right-0 mt-2 z-[99999] w-48 bg-white rounded-md shadow-xl border border-gray-200 overflow-hidden z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-            {/* Profile */}
-            <button
-              onClick={() => router.push("/profile")}
-              className="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-3"
+          {showUserMenu && (
+            <div
+              className="
+                absolute right-0 mt-2
+                w-48
+                z-[99999]
+                bg-white dark:bg-gray-900
+                border border-gray-200 dark:border-gray-700
+                rounded-md
+                shadow-xl
+                overflow-hidden
+              "
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
+              <button
+                onClick={() => router.push("/profile")}
+                className="
+                  w-full
+                  px-4 py-3
+                  text-left
+                  text-sm
+                  text-gray-700 dark:text-gray-200
+                  hover:bg-gray-100 dark:hover:bg-gray-800
+                  flex items-center gap-3
+                "
               >
-                <circle
-                  cx="12"
-                  cy="8"
-                  r="4"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-                <path
-                  d="M4 20C4 16.6863 7.58172 14 12 14C16.4183 14 20 16.6863 20 20"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <circle
+                    cx="12"
+                    cy="8"
+                    r="4"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M4 20C4 16.6863 7.58172 14 12 14C16.4183 14 20 16.6863 20 20"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
 
-              Profile
-            </button>
+                Profile
+              </button>
 
-            {/* Logout */}
-            <button
-              onClick={handleLogout}
-              className="w-full px-4 py-3 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-3"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
+              <button
+                onClick={handleLogout}
+                className="
+                  w-full
+                  px-4 py-3
+                  text-left
+                  text-sm
+                  text-red-600
+                  hover:bg-red-50
+                  dark:hover:bg-red-950
+                  flex items-center gap-3
+                "
               >
-                <path
-                  d="M9 21H5C4.44772 21 4 20.5523 4 20V4C4 3.44772 4.44772 3 5 3H9"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M16 17L21 12L16 7"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M21 12H9"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M9 21H5C4.44772 21 4 20.5523 4 20V4C4 3.44772 4.44772 3 5 3H9"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M16 17L21 12L16 7"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M21 12H9"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
 
-              Logout
-            </button>
-          </div>
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </header>

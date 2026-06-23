@@ -3,9 +3,11 @@
 import { lambdaGet } from "@/app/lamda/lambdaClient";
 import { embedDashboard } from "@preset-sdk/embedded";
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import { useTheme } from "../ThemeProvider";
 
 const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
   const [loading, setLoading] = useState(true);
+  const { theme } = useTheme()
 
   const loadingRef = useRef(false);
   const retryRef = useRef(null);
@@ -60,7 +62,13 @@ const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
           hideChartControls: false,
         },
       });
-      dashboard.setThemeMode("dark");
+      if (theme === "dark") {
+        dashboard.setThemeMode("dark");
+      }
+      else {
+        dashboard.setThemeMode("default");
+      }
+
       // Verify iframe actually rendered
       clearTimeout(retryRef.current);
 
@@ -80,7 +88,7 @@ const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
       loadingRef.current = false;
       setLoading(false);
     }
-  }, [EMBEDDED_ID, fetchGuestTokenFromBackend]);
+  }, [EMBEDDED_ID, fetchGuestTokenFromBackend, theme]);
 
   // Initial load
   useEffect(() => {
@@ -139,10 +147,10 @@ const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
   return (
     <main className="w-full h-full relative">
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-white/70 z-10">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600" />
-        </div>
-      )}
+  <div className="absolute inset-0 flex items-center justify-center bg-black/10 backdrop-blur-sm z-10">
+    <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-300 border-t-[#0066B3]" />
+  </div>
+)}
 
       <div
         id="analytic2"

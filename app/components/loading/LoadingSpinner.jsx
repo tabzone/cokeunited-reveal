@@ -1,11 +1,25 @@
 "use client";
 
-import React from "react";
+import { useEffect, useState } from "react";
 
 export default function LoadingSpinner() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <div className="flex items-center justify-center min-h-screen z-[99999]">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600" />
+    <div
+      className={`flex items-center justify-center min-h-screen z-[99999]
+      ${
+        mounted &&
+        document.documentElement.classList.contains("dark")
+          ? "bg-gray-950"
+          : "bg-white"
+      }`}
+    >
+      <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-300 border-t-[#0066B3]" />
     </div>
   );
 }

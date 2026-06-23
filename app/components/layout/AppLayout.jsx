@@ -11,10 +11,21 @@ export default function AppLayout({ children }) {
       <div className="flex-1 flex flex-col overflow-hidden">
         <Navbar />
 
-        <main className="flex-1 overflow-auto p-4 bg-[#f3f4f6]">{children}</main>
-           <Footer />
+        <main
+          className="
+    flex-1
+    overflow-auto
+    p-4
+    bg-gray-100
+    dark:bg-gray-950
+    text-gray-900
+    dark:text-white
+  "
+        >
+          {children}</main>
+        <Footer />
       </div>
-   
+
     </div>
   );
 }
