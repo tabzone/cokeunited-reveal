@@ -3,11 +3,11 @@
 import { lambdaGet } from "@/app/lamda/lambdaClient";
 import { embedDashboard } from "@preset-sdk/embedded";
 import React, { useEffect, useRef, useState, useCallback } from "react";
-//import { useTheme } from "../ThemeProvider";
+import { useTheme } from "../ThemeProvider";
 
 const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
   const [loading, setLoading] = useState(true);
- // const { theme } = useTheme()
+  const { theme } = useTheme()
 
   const loadingRef = useRef(false);
   const retryRef = useRef(null);
