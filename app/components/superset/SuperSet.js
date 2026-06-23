@@ -3,7 +3,7 @@
 import { lambdaGet } from "@/app/lamda/lambdaClient";
 import { embedDashboard } from "@preset-sdk/embedded";
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import { useTheme } from "../ThemeProvider";
+//import { useTheme } from "../ThemeProvider";
 
 const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
   const [loading, setLoading] = useState(true);
@@ -62,13 +62,13 @@ const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
           hideChartControls: false,
         },
       });
-      if (theme === "dark") {
+   /*   if (theme === "dark") {
         dashboard.setThemeMode("dark");
       }
       else {
         dashboard.setThemeMode("default");
       }
-
+*/
       // Verify iframe actually rendered
       clearTimeout(retryRef.current);
 
