@@ -50,7 +50,7 @@ const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
       // Clear previous embed
       mountPoint.innerHTML = "";
 
-      await embedDashboard({
+      const dashboard = await embedDashboard({
         id: EMBEDDED_ID,
         supersetDomain: presetDashboard,
         mountPoint,
@@ -60,7 +60,7 @@ const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
           hideChartControls: false,
         },
       });
-
+      dashboard.setThemeMode("dark");
       // Verify iframe actually rendered
       clearTimeout(retryRef.current);
 
