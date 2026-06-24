@@ -147,7 +147,7 @@ export default function Navbar() {
           <span>
             Data Last Updated:
             <span className="ml-1 font-medium text-gray-800 dark:text-white">
-              2026/06/20
+              06/24/2026
             </span>
           </span>
 
@@ -156,7 +156,7 @@ export default function Navbar() {
           <span>
             WE:
             <span className="ml-1 font-medium text-gray-800 dark:text-white">
-              06/20 (Week 25)
+             6/19/2026 (Week 25)
             </span>
           </span>
         </div>
