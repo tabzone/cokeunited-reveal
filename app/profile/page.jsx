@@ -9,6 +9,7 @@ import {
 
 import RoleGuard from "../components/RoleGuard";
 import AppLayout from "../components/layout/AppLayout";
+import LoadingSpinner from "../components/loading/LoadingSpinner";
 
 export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
@@ -80,7 +81,7 @@ export default function ProfilePage() {
 
       alert(
         error?.message ||
-          "Failed to update profile"
+        "Failed to update profile"
       );
     } finally {
       setSavingProfile(false);
@@ -133,7 +134,7 @@ export default function ProfilePage() {
 
       alert(
         error?.message ||
-          "Failed to update password"
+        "Failed to update password"
       );
     } finally {
       setSavingPassword(false);
@@ -144,9 +145,8 @@ export default function ProfilePage() {
     `${form.given_name} ${form.family_name}`.trim();
 
   const initials =
-    `${form.given_name?.[0] || ""}${
-      form.family_name?.[0] || ""
-    }`.toUpperCase() || "U";
+    `${form.given_name?.[0] || ""}${form.family_name?.[0] || ""
+      }`.toUpperCase() || "U";
 
   if (loading) {
     return (
@@ -158,11 +158,14 @@ export default function ProfilePage() {
         ]}
       >
         <AppLayout>
+          <LoadingSpinner />
+          {/*
           <div className="max-w-5xl mx-auto px-6 py-10">
-            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center">
+            <div className="bg-white dark:bg-[#191919] rounded-2xl border border-gray-200 dark:border-[#2a2a2a] shadow-sm overflow-hidden">
               Loading profile...
             </div>
           </div>
+        </AppLayout>*/}
         </AppLayout>
       </RoleGuard>
     );
@@ -180,11 +183,11 @@ export default function ProfilePage() {
         <div className="max-w-5xl mx-auto px-6 py-8">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
               My Profile
             </h1>
 
-            <p className="text-gray-500 mt-2">
+            <p className="text-gray-500 dark:text-gray-400 mt-2">
               Manage your account
               information and security
               settings.
@@ -192,18 +195,18 @@ export default function ProfilePage() {
           </div>
 
           {/* User Card */}
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 mb-6">
+          <div className="bg-white dark:bg-[#191919] rounded-2xl border border-gray-200 dark:border-[#2a2a2a] shadow-sm p-6 mb-6">
             <div className="flex flex-col md:flex-row md:items-center gap-5">
               <div className="w-20 h-20 rounded-full bg-[#0066B3]/10 text-[#0066B3] flex items-center justify-center text-2xl font-bold">
                 {initials}
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-gray-900">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                   {fullName}
                 </h2>
 
-                <p className="text-gray-500">
+                <p className="text-gray-500 dark:text-gray-400">
                   {form.email}
                 </p>
 
@@ -218,13 +221,13 @@ export default function ProfilePage() {
           </div>
 
           {/* Profile Information */}
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 mb-6">
+          <div className="bg-white dark:bg-[#191919] rounded-2xl border border-gray-200 dark:border-[#2a2a2a] shadow-sm p-6 mb-6">
             <div className="mb-6">
-              <h2 className="text-lg font-semibold text-gray-900">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Profile Information
               </h2>
 
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
                 Update your personal
                 information.
               </p>
@@ -238,7 +241,7 @@ export default function ProfilePage() {
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     First Name
                   </label>
 
@@ -254,7 +257,22 @@ export default function ProfilePage() {
                           e.target.value,
                       })
                     }
-                    className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0066B3]"
+                    className="
+  w-full rounded-xl
+  border border-gray-300
+  dark:border-[#2a2a2a]
+
+  bg-white
+  dark:bg-[#252525]
+
+  text-gray-900
+  dark:text-white
+
+  px-4 py-3
+  focus:outline-none
+  focus:ring-2
+  focus:ring-[#0066B3]
+"
                   />
                 </div>
 
@@ -275,7 +293,22 @@ export default function ProfilePage() {
                           e.target.value,
                       })
                     }
-                    className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0066B3]"
+                    className="
+  w-full rounded-xl
+  border border-gray-300
+  dark:border-[#2a2a2a]
+
+  bg-white
+  dark:bg-[#252525]
+
+  text-gray-900
+  dark:text-white
+
+  px-4 py-3
+  focus:outline-none
+  focus:ring-2
+  focus:ring-[#0066B3]
+"
                   />
                 </div>
               </div>
@@ -289,7 +322,22 @@ export default function ProfilePage() {
                   type="email"
                   value={form.email}
                   disabled
-                  className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-500"
+                  className="
+  w-full rounded-xl
+  border border-gray-300
+  dark:border-[#2a2a2a]
+
+  bg-white
+  dark:bg-[#252525]
+
+  text-gray-900
+  dark:text-white
+
+  px-4 py-3
+  focus:outline-none
+  focus:ring-2
+  focus:ring-[#0066B3]
+"
                 />
               </div>
 
@@ -298,7 +346,7 @@ export default function ProfilePage() {
                 disabled={
                   savingProfile
                 }
-                className="px-5 py-3 bg-[#0066B3] hover:bg-[#00589C] disabled:opacity-50 text-white rounded-xl font-medium transition-colors"
+                className="px-5 py-3 bg-[#0066B3] hover:bg-[#00589C] disabled:opacity-50 text-white rounded-xl font-medium transition-colors cursor-pointer"
               >
                 {savingProfile
                   ? "Saving..."
@@ -308,7 +356,7 @@ export default function ProfilePage() {
           </div>
 
           {/* Security */}
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+          <div className="bg-white dark:bg-[#191919] rounded-2xl border border-gray-200 dark:border-[#2a2a2a] p-8 text-center dark:text-white">
             <button
               type="button"
               onClick={() =>
@@ -316,14 +364,19 @@ export default function ProfilePage() {
                   !showPasswordForm
                 )
               }
-              className="w-full flex items-center justify-between p-6 hover:bg-gray-50 transition-colors"
+              className="
+  w-full flex items-center justify-between p-6
+  hover:bg-gray-50 dark:hover:bg-[#252525]
+  transition-colors
+  cursor-pointer
+"
             >
               <div className="text-left">
-                <h2 className="text-lg font-semibold text-gray-900">
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                   Security
                 </h2>
 
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-gray-500 dark:text-gray-400">
                   Change your account
                   password.
                 </p>
@@ -334,11 +387,10 @@ export default function ProfilePage() {
                 height="20"
                 viewBox="0 0 24 24"
                 fill="none"
-                className={`transition-transform duration-200 ${
-                  showPasswordForm
-                    ? "rotate-180"
-                    : ""
-                }`}
+                className={`transition-transform duration-200 ${showPasswordForm
+                  ? "rotate-180"
+                  : ""
+                  }`}
               >
                 <path
                   d="M6 9L12 15L18 9"
@@ -351,7 +403,7 @@ export default function ProfilePage() {
             </button>
 
             {showPasswordForm && (
-              <div className="border-t border-gray-100 p-6">
+              <div className="border-t border-gray-100 dark:border-[#2a2a2a] p-6">
                 <form
                   onSubmit={
                     handlePasswordSubmit
@@ -376,7 +428,16 @@ export default function ProfilePage() {
                             e.target.value,
                         })
                       }
-                      className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0066B3]"
+                      className="
+  w-full rounded-xl
+  border border-gray-200 dark:border-[#2a2a2a]
+
+  bg-gray-50 dark:bg-[#252525]
+
+  px-4 py-3
+
+  text-gray-500 dark:text-gray-400
+"
                     />
                   </div>
 
@@ -430,7 +491,7 @@ export default function ProfilePage() {
                     disabled={
                       savingPassword
                     }
-                    className="px-5 py-3 bg-[#0066B3] hover:bg-[#00589C] disabled:opacity-50 text-white rounded-xl font-medium transition-colors"
+                    className="px-5 py-3 bg-[#0066B3] hover:bg-[#00589C] disabled:opacity-50 text-white rounded-xl font-medium transition-colors cursor-pointer"
                   >
                     {savingPassword
                       ? "Updating..."

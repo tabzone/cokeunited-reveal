@@ -16,8 +16,8 @@ export default function Navbar() {
   const { logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
 
-  const isRetailerPlanogram =
-    pathname?.startsWith("/retailerPlanogram");
+  const isProfile =
+    pathname?.startsWith("/profile");
 
   const parts = pathname?.split("/") || [];
   const projectId = parts[2];
@@ -63,50 +63,6 @@ export default function Navbar() {
         transition-colors duration-300
       "
     >
-      {/* Retailer Planogram Header */}
-      {isRetailerPlanogram && (
-        <div className="flex items-center">
-          <button
-            onClick={() => router.back()}
-            className="
-              flex items-center gap-2
-              text-gray-600 dark:text-gray-300
-              hover:text-[#0066B3]
-              transition-colors
-              cursor-pointer
-            "
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M15 18L9 12L15 6"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-
-            <span className="text-sm">Back</span>
-          </button>
-
-          <div className="mx-4 h-6 w-px bg-gray-300 dark:bg-gray-700" />
-
-          <div className="flex flex-col">
-            <span className="font-semibold text-lg text-gray-800 dark:text-white">
-              {projectName}
-            </span>
-
-            <span className="text-xs text-gray-500 dark:text-gray-400">
-              Retailer Planogram
-            </span>
-          </div>
-        </div>
-      )}
 
       {/* Logos */}
       <div className="flex items-center">
@@ -127,9 +83,60 @@ export default function Navbar() {
           />
         </Link>
       </div>
+      {/* Retailer Planogram Header */}
+      {isProfile && (
+        <div className="flex items-center">
+          <button
+            onClick={() => router.back()}
+            className="
+              flex items-center gap-2
+              text-gray-600 dark:text-gray-300
+              hover:text-[#0066B3]
+              transition-colors
+               p-2
+            rounded-lg
+            border
+            border-gray-300 dark:border-gray-700
+            hover:bg-gray-100 dark:hover:bg-gray-800
+            transition-all
+            cursor-pointer
+              
+            "
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M15 18L9 12L15 6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+
+            <span className="text-sm">Back</span>
+          </button>
+
+          {/* <div className="mx-4 h-6 w-px bg-gray-300 dark:bg-gray-700" />
+
+          <div className="flex flex-col">
+            <span className="font-semibold text-lg text-gray-800 dark:text-white">
+              {projectName}
+            </span>
+
+            <span className="text-xs text-gray-500 dark:text-gray-400">
+              Retailer Planogram
+            </span>
+          </div> */}
+        </div>
+      )}
 
       {/* Report Details */}
-      <div className="flex-1 flex justify-start">
+      <div className="flex-1 flex justify-start ml-4">
         <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-300">
           <span className="font-medium text-gray-800 dark:text-white">
             Category Report
@@ -162,6 +169,7 @@ export default function Navbar() {
         <button
           onClick={toggleTheme}
           className="
+          
             p-2
             rounded-lg
             border
@@ -339,6 +347,7 @@ export default function Navbar() {
                   text-gray-700 dark:text-gray-200
                   hover:bg-gray-100 dark:hover:bg-gray-800
                   flex items-center gap-3
+                 cursor-pointer
                 "
               >
                 <svg
@@ -376,6 +385,7 @@ export default function Navbar() {
                   hover:bg-red-50
                   dark:hover:bg-red-950
                   flex items-center gap-3
+                  cursor-pointer
                 "
               >
                 <svg
