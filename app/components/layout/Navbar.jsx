@@ -58,7 +58,7 @@ export default function Navbar() {
     <header
       className="
         flex items-center px-4 py-3
-        bg-white dark:bg-gray-900
+        bg-white dark:bg-[#191919]
         border-b border-gray-200 dark:border-gray-800
         transition-colors duration-300
       "
@@ -322,7 +322,7 @@ export default function Navbar() {
                 absolute right-0 mt-2
                 w-48
                 z-[99999]
-                bg-white dark:bg-gray-900
+                bg-white dark:bg-[#191919]
                 border border-gray-200 dark:border-gray-700
                 rounded-md
                 shadow-xl

@@ -15,7 +15,7 @@ export default function LoadingSpinner() {
       ${
         mounted &&
         document.documentElement.classList.contains("dark")
-          ? "bg-gray-950"
+          ? "bg-[#191919]"
           : "bg-white"
       }`}
     >

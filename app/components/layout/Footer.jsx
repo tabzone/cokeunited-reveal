@@ -4,7 +4,7 @@ const Footer = () => {
       className="
         py-3
         bg-white
-        dark:bg-gray-900
+        dark:bg-[#191919]
         border-t
         border-gray-200
         dark:border-gray-800
