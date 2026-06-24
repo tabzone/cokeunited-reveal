@@ -96,31 +96,31 @@ const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
   }, [loadDashboard, report]);
 
   // Reload when tab becomes active again
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        console.log(
-          "Tab became active. Reloading dashboard..."
-        );
+  // useEffect(() => {
+  //   const handleVisibilityChange = () => {
+  //     if (document.visibilityState === "visible") {
+  //       console.log(
+  //         "Tab became active. Reloading dashboard..."
+  //       );
 
-        setTimeout(() => {
-          loadDashboard();
-        }, 500);
-      }
-    };
+  //       setTimeout(() => {
+  //         loadDashboard();
+  //       }, 500);
+  //     }
+  //   };
 
-    document.addEventListener(
-      "visibilitychange",
-      handleVisibilityChange
-    );
+  //   document.addEventListener(
+  //     "visibilitychange",
+  //     handleVisibilityChange
+  //   );
 
-    return () => {
-      document.removeEventListener(
-        "visibilitychange",
-        handleVisibilityChange
-      );
-    };
-  }, [loadDashboard]);
+  //   return () => {
+  //     document.removeEventListener(
+  //       "visibilitychange",
+  //       handleVisibilityChange
+  //     );
+  //   };
+  // }, [loadDashboard]);
 
   // Fallback watchdog for stuck loading
   useEffect(() => {
